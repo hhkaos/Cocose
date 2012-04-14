@@ -1,0 +1,146 @@
+Downloading/unpacking conch
+  Getting page http://pypi.python.org/simple/conch
+  URLs to search for versions for conch:
+  * http://pypi.python.org/simple/conch
+  Getting page http://twistedmatrix.com/trac/wiki/TwistedConch
+  Getting page http://twistedmatrix.com/projects/conch/
+  Analyzing links from page http://pypi.python.org/simple/Conch/
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch (from http://pypi.python.org/simple/Conch/); not a file
+    Skipping link http://twistedmatrix.com/projects/conch/ (from http://pypi.python.org/simple/Conch/); not a file
+  Analyzing links from page http://twistedmatrix.com/trac/wiki/TwistedConch
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/bootstrap.min.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/search (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TracGuide (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?format=txt (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/trac.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/wiki.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/images/favicon.png (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .png
+    Skipping link http://twistedmatrix.com/trac/search/opensearch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Downloads (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/login (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/prefs (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/reset_password (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/register (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/timeline (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/roadmap (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/browser (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/report (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/WikiStart (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TitleIndex (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=history (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=diff&amp;version=9 (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Download (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Contact (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/projects/conch/documentation/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/documents/current/api/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch/SecurityConcerns (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-python (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=defect&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=enhancement&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/query?status=new&amp;status=assigned&amp;status=reopened&amp;component=conch&amp;order=priority (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://sm7.sitemeter.com/stats.asp?site=sm7twistedmatrix (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .asp
+    Skipping link http://twistedmatrix.com/trac/wiki/SiteCredits (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+  Analyzing links from page http://twistedmatrix.com/projects/conch/
+    Skipping link http://twistedmatrix.com/projects/conch/NEWS.txt (from http://twistedmatrix.com/projects/conch/); unknown archive format: .txt
+    Skipping link http://twistedmatrix.com/projects/conch/conch.jpeg (from http://twistedmatrix.com/projects/conch/); unknown archive format: .jpeg
+    Skipping link http://twistedmatrix.com/projects/conch/documentation.rpy (from http://twistedmatrix.com/projects/conch/); unknown archive format: .rpy
+    Skipping link http://twistedmatrix.com/projects/conch/pyshadow-0.1.tar.gz.asc (from http://twistedmatrix.com/projects/conch/); unknown archive format: .asc
+    Skipping link http://twistedmatrix.com/projects/conch/pyshadow-0.1.tar.gz.md5 (from http://twistedmatrix.com/projects/conch/); unknown archive format: .md5
+    Skipping link http://twistedmatrix.com/projects/conch/pyshadow-0.1.tar.gz.md5.asc (from http://twistedmatrix.com/projects/conch/); unknown archive format: .asc
+  Analyzing links from page http://twistedmatrix.com/trac/wiki/TwistedConch
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/bootstrap.min.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/search (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TracGuide (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?format=txt (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/trac.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/wiki.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/images/favicon.png (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .png
+    Skipping link http://twistedmatrix.com/trac/search/opensearch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Downloads (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/login (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/prefs (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/reset_password (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/register (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/timeline (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/roadmap (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/browser (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/report (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/WikiStart (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TitleIndex (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=history (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=diff&amp;version=9 (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Download (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Contact (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/projects/conch/documentation/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/documents/current/api/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch/SecurityConcerns (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-python (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=defect&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=enhancement&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/query?status=new&amp;status=assigned&amp;status=reopened&amp;component=conch&amp;order=priority (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://sm7.sitemeter.com/stats.asp?site=sm7twistedmatrix (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .asp
+    Skipping link http://twistedmatrix.com/trac/wiki/SiteCredits (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+  Analyzing links from page http://twistedmatrix.com/trac/wiki/TwistedConch
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/bootstrap.min.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/search (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TracGuide (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?format=txt (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/trac.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/trac/chrome/common/css/wiki.css (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .css
+    Skipping link http://twistedmatrix.com/images/favicon.png (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .png
+    Skipping link http://twistedmatrix.com/trac/search/opensearch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/Downloads (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/login (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/prefs (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/reset_password (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/register (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/timeline (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/roadmap (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/browser (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/report (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/WikiStart (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TitleIndex (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=history (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch?action=diff&amp;version=9 (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Download (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Documentation (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch#Contact (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/projects/conch/documentation/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/documents/current/api/ (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/wiki/TwistedConch/SecurityConcerns (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-python (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=defect&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/newticket?type=enhancement&amp;component=conch (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://twistedmatrix.com/trac/query?status=new&amp;status=assigned&amp;status=reopened&amp;component=conch&amp;order=priority (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+    Skipping link http://sm7.sitemeter.com/stats.asp?site=sm7twistedmatrix (from http://twistedmatrix.com/trac/wiki/TwistedConch); unknown archive format: .asp
+    Skipping link http://twistedmatrix.com/trac/wiki/SiteCredits (from http://twistedmatrix.com/trac/wiki/TwistedConch); not a file
+  Could not find any downloads that satisfy the requirement conch
+No distributions at all found for conch
+Exception information:
+Traceback (most recent call last):
+  File "/usr/lib/python2.6/dist-packages/pip.py", line 252, in main
+    self.run(options, args)
+  File "/usr/lib/python2.6/dist-packages/pip.py", line 408, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle)
+  File "/usr/lib/python2.6/dist-packages/pip.py", line 1750, in install_files
+    url = finder.find_requirement(req_to_install, upgrade=self.upgrade)
+  File "/usr/lib/python2.6/dist-packages/pip.py", line 1029, in find_requirement
+    raise DistributionNotFound('No distributions at all found for %s' % req)
+DistributionNotFound: No distributions at all found for conch
