@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Panel de administración de empresas</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <style type="text/css">
+        
+        #table-container{
+            max-height:200px;
+            border:1px solid black;
+                overflow:auto;
+        }
+        #empresas{
+                width:100%
+        }
+        #empresas tr:hover{
+            background-color:#ccc;
+        }
+        iframe{
+            width:100%;
+            height:400px;
+        }
+    </style>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $("#empresas tr").click(function(){
+                $("#preview").attr("src",$(this).attr("data-url"));
+            })
+        });
+    </script>
+</head>
+<body>
+    <h1>Empresas de Sevilla</h1>
+    <div id="table-container">
+        <table id="empresas">
+            <tr>
+                <td>Empresa</td>
+                <td>Url</td>
+                <td>Dirección</td>
+                <td>Teléfono</td>
+                <td>Estado</td>
+            </tr>
+            {% for e in empresas %}
+                <tr {% if e.web %} data-url="{{e.web}}" {% endif %}>
+                    <td>{{e.nombre}}</td>
+                    <td>{{e.web}}</td>
+                    <td>{{e.direccion}}</td>
+                    <td>{{e.telefono}}</td>
+                    <td><a href="">No validada</a></td>
+                </tr>
+            
+                
+            {% endfor %}
+        </table>
+    </div>
+    <h2>Previsualización</h2>
+    <iframe src="" id="preview">
+    
+    </iframe>
+</body>
+</html>
