@@ -9,8 +9,7 @@ from scripts.linkedin import do_search
 from models import *
 import json
 import ipdb
-import sys
-sys.setdefaultencoding('utf-8')
+
 
 def home(request):
     empresas = Empresa.objects.all()
@@ -27,6 +26,7 @@ def linkedin_search(request):
     #Datos extraidos y cargados en el diccionario
     data=["id","first-name","last-name","public-profile-url","location","three-current-positions","primary-twitter-account"]
     people=do_search(company="PideCurso")[1]
+    
     persons=[]
     for s in people:
         person=dict()
@@ -34,10 +34,13 @@ def linkedin_search(request):
             if s.getElementsByTagName(d):
                 for n in s.getElementsByTagName(d)[0].childNodes:
                     if n.nodeType == n.TEXT_NODE:
-                        person[d]=n.data
+                        if person.has_key(d):
+                            person[d] = person[d] + n.data
+                        else:
+                            person[d] = n.data
         persons.append(person)
 
-    
-    return render_to_response('linkedin.html', 
-                                dict(results=persons),   
-                                context_instance = RequestContext(request))
+    return HttpResponse(dumps(persons), mimetype="application/json")
+    #~ return render_to_response('linkedin.html', 
+                                #~ dict(results=persons),   
+                                #~ context_instance = RequestContext(request))

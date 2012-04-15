@@ -6,7 +6,12 @@
 </head>
 <body>
     {% for p in results %}
-        <p>{{p}}</p>
+        <p>
+            {{p}}<br>
+            {% for key,value in p.items %}
+                {{key}}={{value}}<br>
+            {% endfor %}
+        </p>
     {% endfor %}
 </body>
 </html>
