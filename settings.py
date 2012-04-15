@@ -115,4 +115,5 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     
     'search_engine',
+    'south',
 )

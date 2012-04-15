@@ -5,16 +5,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <style type="text/css">
         
+        body{
+            font-size:11px;
+        }
         #table-container{
             max-height:200px;
             border:1px solid black;
                 overflow:auto;
         }
+        table{
+            border-collapse: collapse;
+        }
         #empresas{
                 width:100%
         }
+        #empresas tr td{
+            height:20px;
+            line-height:20px;
+            padding: 0;
+        }
         #empresas tr:hover{
             background-color:#ccc;
+            cursor:pointer;
         }
         iframe{
             width:100%;
@@ -36,6 +48,7 @@
         <table id="empresas">
             <tr>
                 <td>Empresa</td>
+                <td>Email</td>
                 <td>Url</td>
                 <td>Dirección</td>
                 <td>Teléfono</td>
@@ -44,6 +57,7 @@
             {% for e in empresas %}
                 <tr {% if e.web %} data-url="{{e.web}}" {% endif %}>
                     <td>{{e.nombre}}</td>
+                    <td>{% for email in e.email.all%}{{email}},{%endfor%}</td>
                     <td>{{e.web}}</td>
                     <td>{{e.direccion}}</td>
                     <td>{{e.telefono}}</td>

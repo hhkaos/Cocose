@@ -73,8 +73,8 @@ print 'Total de empresas', len(empresas)
 for e in empresas:
     e["nombre"]=e.get("nombre").strip()
     if Empresa.objects.filter(nombre=e.get('nombre')).count() == 0:
-        
-        Empresa(nombre=e.get('nombre'),web=e.get('url'),telefono=e.get('telefono'),direccion=e.get('direccion')).save()
+        if Empresa.objects.filter(web=e.get('url')).count() == 0:
+            Empresa(nombre=e.get('nombre'),web=e.get('url'),telefono=e.get('telefono'),direccion=e.get('direccion'),ciudad=ciudad).save()
 
 #~ f.close()
 

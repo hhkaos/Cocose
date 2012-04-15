@@ -6,10 +6,14 @@ from django.conf import settings
 from models import *  
 
 class AdminEmpresa(admin.ModelAdmin):
-    list_display = ('nombre',)
-    #list_filter = ('estado', 'ciudad','curso',)
-    search_fields = ['nombre']
-    #~ filter_horizontal = ('codigo','profesores','colaboradores')
+    list_display = ('nombre','_get_emails','ciudad','web')
+    list_filter = ('ciudad',)
+    search_fields = ['ciudad']
+    filter_horizontal = ('email',)
+    
+    def _get_emails(self, obj):
+        return ', '.join([t for t in obj.email.all().values_list('email', flat=True)])
+    _get_emails.short_description = u'Emails'
     
 class AdminEmpleados(admin.ModelAdmin):
     list_display = ('nombre',)
@@ -18,3 +22,4 @@ class AdminEmpleados(admin.ModelAdmin):
 
 admin.site.register(Empresa, AdminEmpresa)
 admin.site.register(Empleados, AdminEmpleados)
+admin.site.register(Emails)

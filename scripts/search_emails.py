@@ -16,8 +16,6 @@ from BeautifulSoup import BeautifulSoup as BS
 import urllib2
 import re
 
-from search_engine.models import *
-
 def sanitizeUrl(url,root=None):
     
     import re
@@ -94,103 +92,55 @@ def scrap_email(url):
         pass
     
     return emails,html
- 
-urls = [
-        #"http://www.flowersinspace.com",
-        #~ "http://www.trabajostecnicos.es",
-        #~ "http://www.evalgon.com",
-        #~ "http://www.claveweb.com",
-        #~ "http://www.cococomunicazione.com",
-        #~ "http://www.3dsvq.es",
-        #~ "http://www.optiweb.es",
-        #~ "http://www.softtron.net",
-        #~ "http://www.redycomercio.com",
-        #~ "http://www.graphik.es",
-        #~ "http://www.dbisual.com",
-        #~ "http://www.recreativosdg.com",
-        #~ #"http://www.gaarquitectos.com",
-        #~ "http://www.yosoytupadre.com",
-        #~ "http://www.clamsol.com",
-        #~ "http://www.estudiogokiburi.com",
-        #~ "http://www.oklan.es",
-        #~ "http://www.disenocreativo.es",
-        #~ "http://www.bassali.es/",
-        #~ "http://www.estampamultiple.com",
-        "http://www.solucionesdirectas.com",
-        "http://www.elsegnor3.com",
-        "http://www.solucionempresarial.net",
-        "http://www.fogonrural.es",
-        "http://www.sputnix.es",
-        "http://www.rotulia.es",
-        "http://www.iniciatec.es",
-        "http://www.disenograficosevilla.com",
-        "http://www.redycomercio.com",
-        "http://www.soltury.com",
-        "http://www.evalgon.com",
-        "http://www.agenciamediasur.es",
-        "http://www.cococomunicazione.com",
-        "http://www.asycom.es",
-        "http://www.redycomercio.com",
-        "http://www.lacasetadejuanleon.com/",
-        "http://www.oklan.es",
-        "http://www.disenocreativo.es",
-        "http://habitaquo.mastmas.net",
-        "http://www.e-geide.com",
-        "http://www.tapasconarte.com",
-        "http://www.cerotec.net",
-        "http://www.semseo.es",
-        "http://www.iniciatec.es",
-        "http://www.redycomercio.com",
-        "http://www.redycomercio.com",
-        "http://reparaciondeordenadores-sevilla.blogspot.com",
-        "http://www.evalgon.com",
-        "http://www.grupoinova.es",
-        "http://www.asycom.es",
-        "http://www.softtron.net",
-        "http://www.kaipioni.es",
-        "http://www.finode.com",
-        "http://www.svintegra.net",
-        "http://www.anter.org",
-        "http://www.beecoder.com",
-        "http://www.disenocreativo.es",
-        "http://www.sadiel.es/",
-        "http://www.s-dos.es",
-        "http://www.iniciatec.es",
-        ]
+    
+#~ **************************************
+#~ SCRIPT PRINCIPAL
+#~ **************************************
 
+from search_engine.models import *
 #Recuperamos las empresas con web pero sin email
-empresas = Empresa.objects.filter(email="").exclude(web="")
+empresas = Empresa.objects.all().exclude(web="")
 
 for empresa in empresas:
-    url=empresa.web
-    print url
-    
+    if empresa.email.all().count() == 0:
+        url=empresa.web
+        print "Buscamos email de ", url
         
-    urls_visitadas=set()
-    
-    emails,html=scrap_email(url)
+            
+        urls_visitadas=set()
+        
+        emails,html=scrap_email(url)
 
 
-    if emails:
-        print emails
-    else:
-        bs = BS(html)
+        if emails:
+            print emails
+            print "Añadimos a la BD"
+            for email in emails:
+                empresa.email.create(email=email)
+                empresa.save()
+
+        else:
+            bs = BS(html)
+            
+            for a in bs.findAll("a"):
+                if a.get('href') and allowed_link(a.get('href')):
+                    newurl = sanitizeUrl(a.get('href'),url)
         
-        for a in bs.findAll("a"):
-            if a.get('href') and allowed_link(a.get('href')):
-                newurl = sanitizeUrl(a.get('href'),url)
-    
-                if newurl in urls_visitadas:
-                    continue
-                
-                urls_visitadas.add(newurl)
-                
-                if extractMainDomain(url) == extractMainDomain(newurl):
-                    emails,html=scrap_email(newurl)
+                    if newurl in urls_visitadas:
+                        continue
                     
-                    if emails:
-                        print emails
-                        #Empresa(nombre=e.get('nombre'),web=e.get('url'),telefono=e.get('telefono'),direccion=e.get('direccion')).save()
+                    urls_visitadas.add(newurl)
+                    
+                    if extractMainDomain(url) == extractMainDomain(newurl):
+                        emails,html=scrap_email(newurl)
+                        
+                        if emails:
+                            print emails
+                            print "Añadimos a la BD"
+                            for email in emails:
+                                empresa.email.create(email=email)
+                                empresa.save()
+                            #Empresa(nombre=e.get('nombre'),web=e.get('url'),telefono=e.get('telefono'),direccion=e.get('direccion')).save()
             
 for email in emails:
     print email

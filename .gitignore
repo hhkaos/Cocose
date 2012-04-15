@@ -1,0 +1,6 @@
+*.pyc
+.project
+.git
+.pydevproject
+virtualme/*
+.settings
