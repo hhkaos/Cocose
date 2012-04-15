@@ -11,4 +11,13 @@ urlpatterns = patterns('',
         views.home,
         name='home'
     ),     
+    url(r'^(?i)empresas/(?P<ciudad>[\.\w]+)/$',
+        views.empresas,
+        name='empresas'
+    ),
+    
+    url(r'^(?i)linkedin/$',
+        views.linkedin_search,
+        name='linkedin_search'
+    ),
 )
