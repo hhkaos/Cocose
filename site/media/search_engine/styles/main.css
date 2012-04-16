@@ -147,8 +147,7 @@ header nav{
     background-color:white;
  }
     iframe,
-    #table-container,
-    #employees{
+    #table-container{
         height:500px;
     }
 
