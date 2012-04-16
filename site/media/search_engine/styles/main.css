@@ -124,6 +124,9 @@ nav a{
     .clear{
         clear:both;
     }
+    .clearleft{
+        clear:left;
+    }
     .left-align{
         text-align: left;
     }
@@ -183,7 +186,7 @@ header nav{
         width:29%;
     }
     #company-details{
-        width:100%;
+        width:70%;
     }
         #company-details article{
             padding:0.5em;
@@ -209,7 +212,7 @@ header nav{
             }
     
     #company-preview{
-        width:40%;
+        width:69%;
     }
 
 .big{

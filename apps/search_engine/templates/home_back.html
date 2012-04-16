@@ -13,7 +13,9 @@
                 $("#company-details .phone").text($(this).attr("data-telephone"));
                 $("#company-details .address").text($(this).attr("data-address"));
                 $("#company-details .web").text($(this).attr("data-url"));
-                
+                if($(this).attr("data-url")){
+                        $("#preview").attr("src",$(this).attr("data-url"));  
+                }
                 var emails = $(this).attr("data-email").split(",");
                 
                 $("#company-details .emails ul").empty();
@@ -21,12 +23,11 @@
                 $.each(emails, function(i, elem){
                     $("#company-details .emails ul").append("<li>"+elem+"</li>");
                 });
-                
-//                <dd class="emails">
-                    //<ul><li></li></ul>
+            });
             
-            })
-            //$("#preview").attr("src",$(this).attr("data-url"));
+            $("#empresas tr td span.web").click(function(){
+              $("#preview").attr("src",$(this).parent().parent().attr("data-url"));  
+            });
         });
     </script>
 </head>
@@ -97,13 +98,7 @@
         </iframe>
     </section>
     
-    <section id="employees" class="onleft">
-        <h2 class="blue contrast">Personal</h2>
-        <nav class="clear-blue contrast">
-            Web de
-        </nav>
-    </section>
-    <section id="company-details" class="clear">
+    <section id="company-details" class="onleft clearleft">
         <h2 class="blue contrast">Detalles de la empresa</h2>
         <nav class="clear-blue contrast">
             <a href="">Buscar empleados</a>
@@ -134,6 +129,12 @@
                 <dd class="web"></dd>
             </dl>
         </article>
+    </section>
+    <section id="employees" class="onleft">
+        <h2 class="blue contrast">Personal</h2>
+        <nav class="clear-blue contrast">
+            Web de
+        </nav>
     </section>
     <footer class="clear">
         Esta aplicación ha sido desarrollada con fines educativos // By <a href="">@hhkaos</a>, <a href="">@jneight</a>
