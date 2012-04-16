@@ -11,6 +11,10 @@ urlpatterns = patterns('',
         views.home,
         name='home'
     ),     
+    url(r'^(?i)old/$',
+        views.home_old,
+        name='home_old'
+    ),     
     url(r'^(?i)empresas/(?P<ciudad>[\.\w]+)/$',
         views.empresas,
         name='empresas'

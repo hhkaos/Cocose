@@ -3,74 +3,140 @@
     <title>Panel de administración de empresas</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <style type="text/css">
-        
-        body{
-            font-size:11px;
-        }
-        #table-container{
-            max-height:200px;
-            border:1px solid black;
-                overflow:auto;
-        }
-        table{
-            border-collapse: collapse;
-        }
-        #empresas{
-                width:100%
-        }
-        #empresas tr td{
-            height:20px;
-            line-height:20px;
-            padding: 0;
-        }
-        #empresas tr:hover{
-            background-color:#ccc;
-            cursor:pointer;
-        }
-        iframe{
-            width:100%;
-            height:400px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}search_engine/styles/main.css" />
     <script type="text/javascript">
     
         $(document).ready(function(){
             $("#empresas tr").click(function(){
-                $("#preview").attr("src",$(this).attr("data-url"));
+                $("#company-details .name").text($(this).attr("data-name"));
+                $("#company-details .contact-person").text($(this).attr("data-contact-person"));
+                $("#company-details .phone").text($(this).attr("data-telephone"));
+                $("#company-details .address").text($(this).attr("data-address"));
+                $("#company-details .web").text($(this).attr("data-url"));
+                
+                var emails = $(this).attr("data-email").split(",");
+                
+                $("#company-details .emails ul").empty();
+                
+                $.each(emails, function(i, elem){
+                    $("#company-details .emails ul").append("<li>"+elem+"</li>");
+                });
+                
+//                <dd class="emails">
+                    //<ul><li></li></ul>
+            
             })
+            //$("#preview").attr("src",$(this).attr("data-url"));
         });
     </script>
 </head>
 <body>
-    <h1>Empresas de Sevilla</h1>
-    <div id="table-container">
-        <table id="empresas">
-            <tr>
-                <td>Empresa</td>
-                <td>Email</td>
-                <td>Url</td>
-                <td>Dirección</td>
-                <td>Teléfono</td>
-                <td>Estado</td>
-            </tr>
-            {% for e in empresas %}
-                <tr {% if e.web %} data-url="{{e.web}}" {% endif %}>
-                    <td>{{e.nombre}}</td>
-                    <td>{% for email in e.email.all%}{{email}},{%endfor%}</td>
-                    <td>{{e.web}}</td>
-                    <td>{{e.direccion}}</td>
-                    <td>{{e.telefono}}</td>
-                    <td><a href="">No validada</a></td>
+    <header class="blue contrast">
+        <h1>COCOSE - Companies Contacts Search</h1>
+        <nav class="clear-blue">
+            <a href="" title="">Empresas</a>
+            <a href="" title="">Scrappers</a>
+        </nav>
+    </header>
+    <section id="company-list" class="onleft">
+        <h2 class="blue contrast">Empresas</h2>
+        <nav class="clear-blue contrast">
+            <form>
+                <label>Provincia: </label>
+                <select>
+                    <option>Sevilla</option>
+                </select>
+            </form>
+        </nav>
+        <div id="table-container">
+            <table id="empresas">
+                <tr>
+                    <td>Nombre</td>
+                    <td>URL</td>
+                    <td>Estado</td>
                 </tr>
-            
+                {% for e in empresas %}
+                    <tr
+                        data-name="{{e.nombre}}"
+                        data-email="{% for email in e.email.all%}{{email}}, {%endfor%}"
+                        data-contact-person="{{nombre_contacto}} {{apellidos_contacto}}"
+                        data-url="{{e.web}}"
+                        data-address="{{e.direccion}}"
+                        data-telephone="{{e.telefono}}"
+                    >
+                        <td class="left-align">{{e.nombre}}</td>
+                        <td>
+                            {% if e.web %}
+                                <span class="small-icon icon sprite-imgs web"><span>Url</span></span>   
+                            {% else %}
+                                <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if e.validada %}
+                                <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
+                            {% else %}
+                                <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
+                            {% endif %}
+                        
+                        </td>
+                    </tr>
                 
-            {% endfor %}
-        </table>
-    </div>
-    <h2>Previsualización</h2>
-    <iframe src="" id="preview">
+                    
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    <section id="company-preview" class="onleft border">
+        <h2 class="blue contrast">Previsualización</h2>
+        <nav class="clear-blue contrast">
+            Web de
+        </nav>
+        <iframe src="" id="preview">
+        
+        </iframe>
+    </section>
     
-    </iframe>
+    <section id="employees" class="onleft">
+        <h2 class="blue contrast">Personal</h2>
+        <nav class="clear-blue contrast">
+            Web de
+        </nav>
+    </section>
+    <section id="company-details" class="clear">
+        <h2 class="blue contrast">Detalles de la empresa</h2>
+        <nav class="clear-blue contrast">
+            <a href="">Buscar empleados</a>
+            <a href="">Recuperar datos</a>
+        </nav>
+        <article>
+            <dl>
+                <dt>Nombre:</dt>
+                <dd class="name"></dd>
+                
+                <dt>Emails</dt>
+                <dd class="emails">
+                    <ul>
+                        <li></li>
+                    </ul>
+                </dd>
+                
+                <dt>Persona de contacto</dt>
+                <dd class="contact-person"></dd>
+                
+                <dt>Teléfono</dt>
+                <dd class="phone"></dd>
+                
+                <dt>Dirección</dt>
+                <dd class="address"></dd>
+                
+                <dt>Web</dt>
+                <dd class="web"></dd>
+            </dl>
+        </article>
+    </section>
+    <footer class="clear">
+        Esta aplicación ha sido desarrollada con fines educativos // By <a href="">@hhkaos</a>, <a href="">@jneight</a>
+    </footer>
 </body>
 </html>

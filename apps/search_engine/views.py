@@ -13,6 +13,12 @@ import ipdb
 
 def home(request):
     empresas = Empresa.objects.all()
+    return render_to_response('home_back.html', 
+                                dict(empresas=empresas),   
+                                context_instance = RequestContext(request))
+
+def home_old(request):
+    empresas = Empresa.objects.all()
     return render_to_response('home.html', 
                                 #dict(empresas=empresas),   
                                 context_instance = RequestContext(request))

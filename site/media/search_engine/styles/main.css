@@ -1,0 +1,234 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Common to everyone */
+
+body{
+    font-size:14px;
+    font-family: arial;
+    line-height: 1.5em;
+}
+body > header h1, 
+body > header nav,
+body > section h2,
+body > section nav,
+body > section table{
+    padding:0.5em;
+}
+
+nav a{
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    background: #EFEFEF;
+    padding: 0.3em 1em;
+    border-radius: 7px;
+    margin: 0 0.5em;
+}
+.border{
+    border:1px solid #ccc;
+}
+
+.sprite-imgs{
+    background-image: url("/media/search_engine/imgs/Sprite tick-cross.png");
+    background-repeat:no-repeat;
+}
+
+.small-icon{
+    height:16px;
+    width:16px;
+    display:inline-block;
+}
+.small-icon span{
+    display:none;
+}
+.tick{
+    background-position: 0 0px;
+}
+.cross{
+    background-position: 0 -16px;
+}
+.refresh{
+    background-position: 0 -32px;
+}
+.web{
+    background-position: 0 -48px;
+}
+    /*
+     * COLOURS 
+     * 
+     */
+    .blue{
+        background-color: #00A1CB;
+    }
+    .clear-blue{
+        background-color: #00BBE0;
+    }
+    .green{
+        background-color: #01A4A4;
+    }
+    .dark-green{
+        background-color: #32742C
+    }
+    .yellow{
+        background-color: #D0D102
+    }
+    .orange{
+        background-color: #F18D05
+    }
+    .red{
+        background-color: #E54028
+    }
+    .pink{
+        background-color: #D70060
+    }
+    .gray{
+        background-color: #616161
+    }
+    .purple{
+        background-color: #113F8C
+    }
+
+    .contrast{
+        color: white;
+    }
+    /* END COLOURS */
+    
+    /*
+     * POSITIONING
+     */
+    .onleft{
+        float:left;
+    }
+    .onright{
+        float:right;
+    }
+    .clear{
+        clear:both;
+    }
+    .left-align{
+        text-align: left;
+    }
+
+/* HEADER */
+h1 {
+    font-weight: bold;
+    border-bottom: 1px solid;
+    text-align: center;
+    font-size: 1.2em;
+}
+header nav{
+    
+}
+
+/* PANELS */
+ body > section{
+    background-color:white;
+ }
+    iframe,
+    #table-container,
+    #employees{
+        height:500px;
+    }
+
+    #company-list{
+        width:30%;
+    }
+
+        #table-container{
+            border:1px solid black;
+                overflow:auto;
+        }
+        table{
+            border-collapse: collapse;
+            text-align:center;
+        }
+        #empresas{
+                width:100%
+        }
+        #empresas tr td{
+            height: 20px;
+            line-height: 20px;
+            border: 1px solid;
+            padding: 3px;
+        }
+        #empresas tr:hover{
+            background-color:#ccc;
+            cursor:pointer;
+        }
+        iframe{
+            width:100%;
+        }
+
+
+    #employees{
+        width:29%;
+    }
+    #company-details{
+        width:100%;
+    }
+        #company-details article{
+            padding:0.5em;
+        }
+        #company-details article dt{
+            font-weight:bold;
+            float:left;
+            display:block;
+            clear:left;
+        }
+        #company-details article dd{
+            float:left;
+            display:block;
+            margin-left:1em;
+        }
+            #company-details article dd ul{
+                list-style:none;
+                padding:0;
+                margin:0;
+            }
+            #company-details article dd ul li{
+                
+            }
+    
+    #company-preview{
+        width:40%;
+    }
+
+.big{
+    font-size:
+}
+
+
+
+footer{
+    background-color: #666;
+    color: white;
+    font-size: 0.9em;
+    padding: 0.2em 1em;
+    text-align:center;
+}
+footer a{
+    text-decoration:none;
+    color:white;
+}
+header{}
+nav a{
+}

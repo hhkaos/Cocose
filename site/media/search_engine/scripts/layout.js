@@ -24,23 +24,17 @@ Ext.onReady(function() {
         defaults: {
             split: true
         },
+        dockedItems:createToolbar(),
         items: [{
-            region: 'north',
-            collapsible: true,
-            title: 'North',
-            split: true,
-            height: 100,
-            minHeight: 60,
-            html: 'north'
-        },{
             region: 'west',
             collapsible: true,
-            title: 'Starts at width 30%',
+            title: 'Empresas',
             split: true,
             width: '30%',
             minWidth: 100,
             minHeight: 140,
-            html: 'west<br>I am floatable'
+            html: 'west<br>I am floatable',
+            dockedItems:createToolbar()
         },{
             region: 'center',
             layout: 'border',
@@ -48,7 +42,7 @@ Ext.onReady(function() {
             items: [{
                 region: 'center',
                 html: 'center center',
-                title: 'Center',
+                title: 'Previsualización de la web',
                 minHeight: 80,
                 items: [cw = Ext.create('Ext.Window', {
                     xtype: 'window',
@@ -63,28 +57,7 @@ Ext.onReady(function() {
                     minimize: function() {
                         this.floatParent.down('button#toggleCw').toggle();
                     }
-                })],
-                dockedItems: [{
-                    xtype: 'toolbar',
-                    dock: 'bottom',
-                    items: ['Text followed by a spacer',
-                        ' ', {
-                            itemId: 'toggleCw',
-                            text: 'Constrained Window',
-                            enableToggle: true,
-                            toggleHandler: function() {
-                            cw.setVisible(!cw.isVisible());
-                        }
-                    }]
-                }]
-            },{
-                region: 'south',
-                height: 100,
-                split: true,
-                collapsible: true,
-                title: 'Splitter above me',
-                minHeight: 60,
-                html: 'center south'
+                })]
             }]
         },{
             region: 'east',
@@ -114,34 +87,42 @@ Ext.onReady(function() {
             split: true,
             height: 200,
             minHeight: 120,
-            title: 'South',
-            layout: {
-                type: 'border',
-                padding: 5
-            },
-            items: [{
-                title: 'South Central',
-                region: 'center',
-                minWidth: 80,
-                html: 'South Central'
-            }, {
-                title: 'South Eastern',
-                region: 'east',
-                flex: 1,
-                minWidth: 80,
-                html: 'South Eastern',
-                split: true,
-                collapsible: true
-            }, {
-                title: 'South Western',
-                region: 'west',
-                flex: 1,
-                minWidth: 80,
-                html: 'South Western<br>I collapse to nothing',
-                split: true,
-                collapsible: true,
-                collapseMode: 'mini'
-            }]
+            title: 'Personal',
+            html: 'Test'
         }]
     });
+    
 });
+/**
+ * Creates the toolbar to be used for controlling feeds.
+ * @private
+ * @return {Ext.toolbar.Toolbar}
+ */
+createToolbar = function(){
+    this.createActions();
+    this.toolbar = Ext.create('widget.toolbar', {
+        items: [this.addAction, this.removeAction]
+    });
+    return this.toolbar;
+}
+
+/**
+ * Create actions to share between toolbar and menu
+ * @private
+ */
+createActions = function(){
+    this.addAction = Ext.create('Ext.Action', {
+        scope: this,
+        handler: this.onAddFeedClick,
+        text: 'Add feed',
+        iconCls: 'feed-add'
+    });
+
+    this.removeAction = Ext.create('Ext.Action', {
+        itemId: 'remove',
+        scope: this,
+        handler: this.onRemoveFeedClick,
+        text: 'Remove feed',
+        iconCls: 'feed-remove'
+    });
+}
