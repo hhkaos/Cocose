@@ -203,11 +203,8 @@ header nav{
         }
 
 
-    #employees{
-        width:30%;
-    }
-    #whois-sc {
-        width: 29%;
+    #whois-sc, #employees{
+        width: 30%;
         max-height: 300px;
         overflow: auto;
     }
