@@ -24,4 +24,19 @@ urlpatterns = patterns('',
         views.linkedin_search,
         name='linkedin_search'
     ),
+    
+    url(r'^(?i)linkedin/save/$',
+        views.linkedin_save,
+        name='linkedin_save'
+    ),
+    
+    url(r'^(?i)google/$',
+        views.google,
+        name='google'
+    ),
+    
+    url(r'^(?i)whois/$',
+        views.whois,
+        name='whois'
+    ),
 )

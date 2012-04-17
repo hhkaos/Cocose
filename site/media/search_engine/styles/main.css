@@ -22,7 +22,7 @@ time, mark, audio, video {
 /* Common to everyone */
 
 body{
-    font-size:14px;
+    font-size:13px;
     font-family: arial;
     line-height: 1.5em;
 }
@@ -31,7 +31,7 @@ body > header nav,
 body > section h2,
 body > section nav,
 body > section table{
-    padding:0.5em;
+    padding:0.3em 0.5em;
 }
 
 nav a{
@@ -146,14 +146,36 @@ header nav{
  body > section{
     background-color:white;
  }
+    body > section h2{
+        border: 1px solid #CCC;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    body > section nav{
+        border-left:1px solid #ccc;
+        border-right:1px solid #ccc;
+        min-height: 26px;
+        line-height: 26px;
+    }
+    
+    #no-iframe{
+        display: none;
+        overflow: auto;
+        padding: 1em;
+    }
     iframe,
-    #table-container{
+    #table-container,
+    #no-iframe{
         height:500px;
     }
 
     #company-list{
         width:30%;
     }
+        #company-list nav form{
+            display: inline-block;
+        }
 
         #table-container{
             border:1px solid black;
@@ -182,11 +204,26 @@ header nav{
 
 
     #employees{
-        width:29%;
+        width:30%;
+    }
+    #whois-sc {
+        width: 29%;
+        max-height: 300px;
+        overflow: auto;
+    }
+    #whois-sc strong{
+        font-weight:bold;
     }
     #company-details{
-        width:70%;
+        width:40%;
     }
+        #company-details article button{
+            display: block;
+            margin-top: 1em;
+            float: right;
+            margin-bottom: 1em;
+        }
+        #company-details dl:after,#company-details  article  button:after{clear:both;content:".";display:block;height:0;visibility:hidden}
         #company-details article{
             padding:0.5em;
         }
@@ -201,7 +238,7 @@ header nav{
             display:block;
             margin-left:1em;
         }
-            #company-details article dd ul{
+            #company-details article dd ul,#employees ul{
                 list-style:none;
                 padding:0;
                 margin:0;
@@ -211,7 +248,7 @@ header nav{
             }
     
     #company-preview{
-        width:69%;
+        width:70%;
     }
 
 .big{
@@ -233,4 +270,26 @@ footer a{
 }
 header{}
 nav a{
+}
+
+#no-iframe ul{
+    list-style:none;
+}
+
+#no-iframe ul li{
+    margin-bottom:1em;
+}
+#no-iframe ul li h3{
+    font-size:1.2em;
+}
+#no-iframe h3.big{
+    font-weight:bold;
+    font-size:1.4em;
+}
+
+
+#no-iframe ul li span.link{
+    color:green;
+    display:block;
+    font-size:0.9em
 }

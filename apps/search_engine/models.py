@@ -20,7 +20,7 @@ class Empresa(models.Model):
     
     modificado = models.DateTimeField(auto_now=True)
     creado = models.DateTimeField(auto_now_add=True)
-    #~ validada = models.BooleanField(_(u"Validada"), default=False)
+    validada = models.BooleanField(_(u"Validada"), default=False)
 
     def __unicode__(self):
         return unicode(self.nombre)

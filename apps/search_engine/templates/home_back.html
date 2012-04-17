@@ -4,25 +4,173 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}search_engine/styles/main.css" />
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
+        google.load("search", "1");
+    </script>
     
+    <script type="text/javascript">
+        
+        function getDomain(url){
+            return url.match(/:\/\/(www\.)?(.[^/:]+)/)[2];
+        }
+        searchWhois = function(){
+            $.ajax({
+                url: 'whois/',
+                type: "POST",
+                data: { domain: $("#whois-value").val()},
+                success: function(data) {
+                    x=data;
+                    $("#whois-text").html("<strong>Text:</strong> "+data[0]['text'].replace(/\n/g, '<br />'))
+                    $("#whois-emails").html("<strong>Emails:</strong> "+data[0].emails.join(" "))
+                }}
+            );
+            $("#no-iframe").show();
+            $("#preview").hide();
+        }
+        
+        google_search = function(query){
+            $.ajax({
+                url: 'google/',
+                type: "POST",
+                data: { query: query},
+                success: function(data) {
+                    var root=$("#no-iframe ul");
+                    root.empty();
+                    $.each(data, function (i,elem){
+                        root.append("<li><h3><a href=\"#\" onclick=\"cargarFrame('"+elem['href']+"')\">"+elem['title']+"</a></h3><span class=\"link\">"+elem['href']+"</span>"+elem['desc']+"</li>")
+                    })
+                }}
+            );
+            $("#no-iframe").show();
+            $("#preview").hide();
+        }
+        ocultarEmpresas = function(url){
+            $.each($(".company-state"),function(i,elem){
+                if ($(this).find("span").hasClass("tick")){
+                    if($(this).parent().is(":visible"))
+                        $(this).parent().hide()
+                    else
+                        $(this).parent().show()
+                }
+            })
+            if($(".company-state .cross").is(":visible"))
+                $("#ocultar").text("Ocultar validadas")
+            else
+                $("#ocultar").text("Mostrar válidadas")
+        }
+        cargarFrame = function(url){
+            $("#preview").attr("src",url);
+            $("#no-iframe").hide();
+            $("#preview").show();
+        }
+        cargar = function(obj){
+            $("#preview").attr("src",$(obj).attr("data-profile"));
+            $("#no-iframe").hide();
+            $("#preview").show();
+        }
+        saveChanges = function(){
+            data={}
+            data['id']=$("#company-id").val();
+            $.each($("#company-details input"), function(i, elem){
+                data[$(elem).attr("name")]=$(elem).val();
+            });
+            $.ajax({
+                    url: 'linkedin/save/',
+                    type: "POST",
+                    data: data,
+                    success: function(data) {
+                        
+                    }
+            });
+        }
+        loadEmployees = function (obj){
+            var company_name = $("#company-details").attr("data-name")
+            $("#employees ul").empty();
+            $.ajax({
+                    url: 'linkedin/',
+                    type: "POST",
+                    data: { company: company_name},
+                    success: function(data) {
+                        if(data.length==0){
+                            $("#employees ul").append("<li>No se han encontrado datos</li>");
+                        }
+                        $.each(data,function(i,elem){ 
+                            cargo="";
+                            for (i=0; i < parseInt(elem['three-current-positions']['total']); i++){
+                                pos=elem['three-current-positions']['positions'][i];
+                                cargo+=pos['title']+" en "+pos['company']+"<br>";
+                            }
+                            
+                            $("#employees ul").append("<li>"+
+                                                        "<strong>Nombre</strong>: <button onclick='cargar(this)' data-profile='"+elem['public-profile-url']+"'>"+elem['first-name']+" "+elem['last-name']+"</button>"+
+                                                        "<br><strong>Location</strong>: "+elem['location']['name']+", "+elem['country']+
+                                                        "<br><strong>Cargo</strong>: "+cargo+
+                                                        "<br><strong>Twitter</strong>:"+elem['primary-twitter-account']+
+                                                      "</li>")
+                        });
+                        
+//                        $('#employees').append("<p>"+data+"</p>");
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        $("#employees ul").append("<li>"+textStatus+"</li>");
+                    }
+                });
+        }
         $(document).ready(function(){
             $("#empresas tr").click(function(){
-                $("#company-details .name").text($(this).attr("data-name"));
-                $("#company-details .contact-person").text($(this).attr("data-contact-person"));
+                var company_name = $(this).attr("data-name");
+                
+                $("#company-id").val($(this).attr("data-company-id"));
+                $("#company-details").attr("data-name",company_name);
+                $("#company-details .name").text(company_name);
+                if($(this).attr("data-contact-person")!="" && $(this).attr("data-contact-person")!=" ")
+                    $("#company-details .contact-person").text($(this).attr("data-contact-person"));
+                else
+                    $("#company-details .contact-person").html('<input name="nombre_contacto" type="text" />');
+                    
                 $("#company-details .phone").text($(this).attr("data-telephone"));
                 $("#company-details .address").text($(this).attr("data-address"));
-                $("#company-details .web").text($(this).attr("data-url"));
+                if($(this).attr("data-url")){
+                    $("#company-details .web").text($(this).attr("data-url"));
+                    $("#whois-value").val(getDomain($(this).attr("data-url")));
+                    searchWhois();
+                    
+                }else{
+                    $("#company-details .web").html('<input type="text" name="web" style="width: 400px;">')
+                    $("#whois-value").val("");
+                    $("#whois-text").html("<strong>Text:</strong> ")
+                    $("#whois-emails").html("<strong>Emails:</strong> ")
+                }
+                    
+                if($(this).attr("data-url"))
+                    $("#company-preview .company-name").text("Web de "+company_name)
+                
+                    
                 if($(this).attr("data-url")){
                         $("#preview").attr("src",$(this).attr("data-url"));  
+                        $("#no-iframe").hide();
+                        $("#preview").show();
+                        
+                }else{
+                    var query="\""+company_name+"\" "+$("#city option:selected").val();
+                    google_search(query);
                 }
+            
                 var emails = $(this).attr("data-email").split(",");
-                
+                var hayMails=false;
                 $("#company-details .emails ul").empty();
                 
                 $.each(emails, function(i, elem){
-                    $("#company-details .emails ul").append("<li>"+elem+"</li>");
+                    if(elem!=""){
+                        $("#company-details .emails ul").append("<li>"+elem+"</li>");
+                        hayMails=true;
+                    }
                 });
+                loadEmployees();
+                if (!hayMails){
+                    $("#company-details .emails ul").append('<li><input name="email" type="text" /></li>');
+                }
             });
             
             $("#empresas tr td span.web").click(function(){
@@ -35,8 +183,8 @@
     <header class="blue contrast">
         <h1>COCOSE - Companies Contacts Search</h1>
         <nav class="clear-blue">
-            <a href="" title="">Empresas</a>
-            <a href="" title="">Scrappers</a>
+            <button>Empresas</button>
+            <button>Scrappers</button>
         </nav>
     </header>
     <section id="company-list" class="onleft">
@@ -44,23 +192,27 @@
         <nav class="clear-blue contrast">
             <form>
                 <label>Provincia: </label>
-                <select>
-                    <option>Sevilla</option>
+                <select id="city">
+                    <option value="sevilla">Sevilla</option>
                 </select>
             </form>
+            <button onclick="javascript:ocultarEmpresas()" id="ocultar">Ocultar válidadas</button>
         </nav>
         <div id="table-container">
             <table id="empresas">
                 <tr>
                     <td>Nombre</td>
                     <td>URL</td>
+                    <td>Email</td>
+                    <td>Contacto</td>
                     <td>Estado</td>
                 </tr>
                 {% for e in empresas %}
                     <tr
+                        data-company-id="{{e.id}}"
                         data-name="{{e.nombre}}"
                         data-email="{% for email in e.email.all%}{{email}}, {%endfor%}"
-                        data-contact-person="{{nombre_contacto}} {{apellidos_contacto}}"
+                        data-contact-person="{{e.nombre_contacto}} {{e.apellidos_contacto}}"
                         data-url="{{e.web}}"
                         data-address="{{e.direccion}}"
                         data-telephone="{{e.telefono}}"
@@ -74,6 +226,20 @@
                             {% endif %}
                         </td>
                         <td>
+                            {% if e.email.all|length > 0 %}
+                                <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
+                            {% else %}
+                                <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if e.nombre_contacto %}
+                                <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
+                            {% else %}
+                                <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
+                            {% endif %}
+                        </td>
+                        <td class="company-state">
                             {% if e.validada %}
                                 <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
                             {% else %}
@@ -88,21 +254,27 @@
             </table>
         </div>
     </section>
-    <section id="company-preview" class="onleft border">
+    <section id="company-preview" class="onleft">
         <h2 class="blue contrast">Previsualización</h2>
         <nav class="clear-blue contrast">
-            Web de
+            <span class="company-name"></span> 
         </nav>
         <iframe src="" id="preview">
         
         </iframe>
+        <div id="no-iframe">
+            <h3 class="big">Búsqueda en Google</h3>
+            <ul>
+            </ul>
+
+      
+        </div>
     </section>
     
     <section id="company-details" class="onleft clearleft">
         <h2 class="blue contrast">Detalles de la empresa</h2>
         <nav class="clear-blue contrast">
-            <a href="">Buscar empleados</a>
-            <a href="">Recuperar datos</a>
+            <button>Recuperar datos</button>
         </nav>
         <article>
             <dl>
@@ -127,14 +299,31 @@
                 
                 <dt>Web</dt>
                 <dd class="web"></dd>
+                <input type="hidden" id="company-id" value=""/>
             </dl>
+            <button class="clear" onclick="javascript:saveChanges()">Guardar cambios</button>
         </article>
+    </section>
+    <section id="whois-sc" class="onleft">
+        <h2 class="blue contrast">Whois</h2>
+        <nav class="clear-blue contrast">
+            <input type="text" id="whois-value" value="" />
+            <button onclick="javascript:searchWhois()">Buscar</button>
+        </nav>
+        <p id="whois-emails">
+        
+        </p>
+        <p id="whois-text">
+        
+        </p>
     </section>
     <section id="employees" class="onleft">
         <h2 class="blue contrast">Personal</h2>
         <nav class="clear-blue contrast">
-            Web de
+            Datos recuperados de Linkedin
         </nav>
+        <ul>
+        </ul>
     </section>
     <footer class="clear">
         Esta aplicación ha sido desarrollada con fines educativos // By <a href="">@hhkaos</a>, <a href="">@jneight</a>

@@ -4,3 +4,4 @@
 .pydevproject
 virtualme/*
 .settings
+apps/search_engine/*
