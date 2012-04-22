@@ -15,6 +15,10 @@ urlpatterns = patterns('',
         views.home_old,
         name='home_old'
     ),     
+    url(r'^(?i)backbone/$',
+        views.home_backbone,
+        name='home_backbone'
+    ),     
     url(r'^(?i)empresas/(?P<ciudad>[\.\w]+)/$',
         views.empresas,
         name='empresas'
@@ -34,7 +38,14 @@ urlpatterns = patterns('',
         views.google,
         name='google'
     ),
-    
+    url(r'^(?i)del/$',
+        views.remove_company,
+        name='remove_company'
+    ),
+    url(r'^(?i)validar/$',
+        views.validar_company,
+        name='validar_company'
+    ),
     url(r'^(?i)whois/$',
         views.whois,
         name='whois'

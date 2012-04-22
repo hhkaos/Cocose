@@ -23,6 +23,12 @@ def home(request):
                                 dict(empresas=empresas),   
                                 context_instance = RequestContext(request))
 
+def home_backbone(request):
+    empresas = Empresa.objects.all()
+    return render_to_response('home_backbone.html', 
+                                dict(empresas=empresas),   
+                                context_instance = RequestContext(request))
+
 def home_old(request):
     empresas = Empresa.objects.all()
     return render_to_response('home.html', 
@@ -47,6 +53,28 @@ def linkedin_search(request):
     
 
     return HttpResponse(dumps(persons), mimetype="application/json")
+
+def remove_company(request):
+    if request.method == 'POST':
+        company_id = request.POST.get('company_id',None)
+        company=Empresa.objects.get(id=company_id)
+        company.ocultar = not company.ocultar
+        company.save()
+
+    # import ipdb
+    # ipdb.set_trace()
+    return HttpResponse(serialize('json',[company]), mimetype="application/json")
+
+def validar_company(request):
+    if request.method == 'POST':
+        company_id = request.POST.get('company_id',None)
+        company=Empresa.objects.get(id=company_id)
+        company.validada = not company.validada
+        company.save()
+
+    # import ipdb
+    # ipdb.set_trace()
+    return HttpResponse(serialize('json',[company]), mimetype="application/json")
     
 def linkedin_save(request):
     
@@ -83,7 +111,8 @@ def google(request):
     if request.method == 'POST':
         query = request.POST.get('query',None)
         query = query.encode("ascii","replace")
-        request = urllib2.Request("https://www.google.es/search?sourceid=chrome&ie=UTF-8&q="+urllib.quote(query)+"+-site%3Apaginasamarillas.es+-site%3A11870.com+-site%3Aes.qdq.com+-site.axesor.com&oq=%22Amadeus+Soluciones+Tecnologicas%22+sevilla++-site:paginasamarillas.es+-site%3A11870.com+-site%3Aes.qdq.com+-site.axesor.com")
+        #request = urllib2.Request("https://www.google.es/search?sourceid=chrome&ie=UTF-8&q="+urllib.quote(query))
+        request = urllib2.Request("https://www.google.es/search?sourceid=chrome&ie=UTF-8&q="+urllib.quote(query)+"+-site%3Apaginasamarillas.es+-site%3A11870.com+-site%3Aes.qdq.com+-site%3Aaxesor.com&oq=%22Amadeus+Soluciones+Tecnologicas%22+sevilla+-site:paginasamarillas.es+-site%3A11870.com+-site%3Aes.qdq.com+-site%3Aaxesor.com+-site%3Aaxesor.es+-site%3Aeinforma.com")
         request.add_header('User-Agent', 'Mozilla/5.0 X11 Linux i686 AppleWebKit/535.19 KHTML, like Gecko Chrome/18.0.1025.151 Safari/535.19')
         response = urllib2.urlopen(request)
         html=response.read()
@@ -94,11 +123,15 @@ def google(request):
             link['title']=' '.join(h.findAll('a')[0].findAll(text=True))
             link['href']=''.join(h.findAll('a')[0]['href'])
             aux=h.nextSibling
-            if aux:#~ import ipdb
-            #~ ipdb.set_trace()
-                if len(aux.findAll("span"))>1:
-                    link['desc']=''.join(aux.findAll("span")[1].findAll(text=True))
-                res.append(link)
+            if aux:
+                # import ipdb
+                # ipdb.set_trace()
+                try:
+                    if len(aux.findAll("span"))>1:
+                        link['desc']=''.join(aux.findAll("span")[1].findAll(text=True))
+                    res.append(link)
+                except Exception, e:
+                    pass
         #raise Exception(res)
         return HttpResponse(dumps(res), mimetype="application/json")
         

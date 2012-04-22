@@ -290,3 +290,20 @@ nav a{
     display:block;
     font-size:0.9em
 }
+#googleSearch{
+    width:500px;
+}
+tr.ocultada{
+    display:none;
+}
+tr.gris{
+    background-color:#ccc;
+}
+body.fullscreen header,
+body.fullscreen #company-list,
+body.fullscreen #company-details,
+body.fullscreen #whois-sc,
+body.fullscreen #employees,
+body.fullscreen footer{
+    display:none;
+}

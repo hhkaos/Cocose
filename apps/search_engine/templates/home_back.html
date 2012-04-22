@@ -10,7 +10,26 @@
     </script>
     
     <script type="text/javascript">
-        
+        function pantallaCompleta(){
+            if(!$("body").hasClass("fullscreen")){
+                $("body").addClass("fullscreen");
+                $("#company-preview").css("width","100%")
+                $("#company-preview button").text("Salir de la pantalla completa")
+                var max_height=$("body").height()-80;
+                console.log(max_height)
+                $("iframe,#no-iframe").height(max_height)
+            }else{
+                $("body").removeClass("fullscreen");
+                $("iframe,#no-iframe").height(500)
+                $("#company-preview").css("width","70%")
+                $("#company-preview button").text("Salir de la pantalla completa")
+            }
+        }
+        function setURL(url){
+            console.log(url)
+            $("dd.web input").val(url);
+            saveChanges();
+        }
         function getDomain(url){
             return url.match(/:\/\/(www\.)?(.[^/:]+)/)[2];
         }
@@ -29,7 +48,13 @@
             $("#preview").hide();
         }
         
+        var btn_search= function(){
+            google_search($("#googleSearch").val());
+        }
+        
+
         google_search = function(query){
+            $("#googleSearch").val(query)
             $.ajax({
                 url: 'google/',
                 type: "POST",
@@ -38,7 +63,7 @@
                     var root=$("#no-iframe ul");
                     root.empty();
                     $.each(data, function (i,elem){
-                        root.append("<li><h3><a href=\"#\" onclick=\"cargarFrame('"+elem['href']+"')\">"+elem['title']+"</a></h3><span class=\"link\">"+elem['href']+"</span>"+elem['desc']+"</li>")
+                        root.append("<li><h3><a href=\"#\" onclick=\"cargarFrame('"+elem['href']+"')\">"+elem['title']+"</a></h3><span class=\"link\">"+elem['href']+"<button onclick='setURL(\""+elem['href']+"\")'>Establecer como predeterminada</button></span>"+elem['desc']+"</li>")
                     })
                 }}
             );
@@ -59,6 +84,22 @@
             else
                 $("#ocultar").text("Mostrar válidadas")
         }
+
+        mostrarEliminadas = function(){
+            if($($("tr.ocultada")[0]).is(":visible")){
+                $("#mostrarEliminadas").text("Ocultar eliminadas")
+                $.each($("tr.ocultada"),function(i,elem){
+                    $(this).hide();
+                })
+            }
+            else{
+                $("#mostrarEliminadas").text("Mostrar eliminadas")
+                $.each($("tr.ocultada"),function(i,elem){
+                    $(this).show();
+                })
+            }
+        }
+
         cargarFrame = function(url){
             $("#preview").attr("src",url);
             $("#no-iframe").hide();
@@ -80,12 +121,60 @@
                     type: "POST",
                     data: data,
                     success: function(data) {
-                        
+                        list_row = $("tr[data-company-id='"+data[0].pk+"']")
+                        if(data[0].fields.web && list_row.attr("data-web")==undefined){
+                            list_row.attr("data-url",data[0].fields.web);
+                            list_row.find("td.url span").removeClass("cross");
+                            list_row.find("td.url span").addClass("web");
+                            $("dd.web").empty().text(data[0].fields.web)
+                        }
+                        if(data[0].fields.nombre_contacto == list_row.attr("data-contact-person")==" "){
+                            list_row.attr("data-contact-person",data[0].fields.nombre_contacto)
+                            list_row.find("td.contacto span").removeClass("cross");
+                            $("dd.contact-person").empty().text(data[0].fields.nombre_contacto);
+                        }
+                            
+                        // if(data[0].fields.email.length!=0)
                     }
             });
         }
+
+        var ocultar = function(obj){
+            var company_id=$(obj).parent().parent().attr("data-company-id");
+            $.ajax({
+                url: 'del/',
+                type: "POST",
+                data: { company_id: company_id},
+                success: function(data) {
+                    $("tr[data-company-id='"+company_id+"']").hide();
+                }
+            })
+        }
+
+        var validarEmpresa = function(obj){
+            var company_id=$(obj).parent().attr("data-company-id");
+            $.ajax({
+                url: 'validar/',
+                type: "POST",
+                data: { company_id: company_id},
+                success: function(data) {
+                    if(data[0].fields.validada==true)
+                        $("tr[data-company-id='"+company_id+"'] td.company-state span").removeClass("cross");
+                    else
+                        $("tr[data-company-id='"+company_id+"'] td.company-state span").addClass("cross");
+                }
+            })
+        }
+        var searchEmployees =function(){
+            loadEmployees($("#linkedinSearch").val())
+        }
         loadEmployees = function (obj){
-            var company_name = $("#company-details").attr("data-name")
+            var company_name;
+            if(!obj)
+                company_name = $("#company-details").attr("data-name")
+            else
+                company_name=obj
+            $("#linkedinSearch").val(company_name)
             $("#employees ul").empty();
             $.ajax({
                     url: 'linkedin/',
@@ -118,22 +207,40 @@
                 });
         }
         $(document).ready(function(){
-            $("#empresas tr").click(function(){
-                var company_name = $(this).attr("data-name");
+
+            $('#googleSearch').bind('keypress', function(e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                console.log(code)
+                if(code == 13) { //Enter keycode
+                    google_search($("#googleSearch").val());
+                }
+            });
+            $('#linkedinSearch').bind('keypress', function(e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                console.log(code)
+                if(code == 13) { //Enter keycode
+                    loadEmployees($("#linkedinSearch").val())
+                }
+            });
+            
+
+            $("#empresas tr td.company-name").click(function(){
+                obj=$(this).parent();
+                var company_name = $(obj).attr("data-name");
                 
-                $("#company-id").val($(this).attr("data-company-id"));
+                $("#company-id").val($(obj).attr("data-company-id"));
                 $("#company-details").attr("data-name",company_name);
                 $("#company-details .name").text(company_name);
-                if($(this).attr("data-contact-person")!="" && $(this).attr("data-contact-person")!=" ")
-                    $("#company-details .contact-person").text($(this).attr("data-contact-person"));
+                if($(obj).attr("data-contact-person")!="" && $(obj).attr("data-contact-person")!=" ")
+                    $("#company-details .contact-person").text($(obj).attr("data-contact-person"));
                 else
                     $("#company-details .contact-person").html('<input name="nombre_contacto" type="text" />');
                     
-                $("#company-details .phone").text($(this).attr("data-telephone"));
-                $("#company-details .address").text($(this).attr("data-address"));
-                if($(this).attr("data-url")){
-                    $("#company-details .web").text($(this).attr("data-url"));
-                    $("#whois-value").val(getDomain($(this).attr("data-url")));
+                $("#company-details .phone").text($(obj).attr("data-telephone"));
+                $("#company-details .address").text($(obj).attr("data-address"));
+                if($(obj).attr("data-url")){
+                    $("#company-details .web").text($(obj).attr("data-url"));
+                    $("#whois-value").val(getDomain($(obj).attr("data-url")));
                     searchWhois();
                     
                 }else{
@@ -143,21 +250,21 @@
                     $("#whois-emails").html("<strong>Emails:</strong> ")
                 }
                     
-                if($(this).attr("data-url"))
+                if($(obj).attr("data-url"))
                     $("#company-preview .company-name").text("Web de "+company_name)
                 
                     
-                if($(this).attr("data-url")){
-                        $("#preview").attr("src",$(this).attr("data-url"));  
+                if($(obj).attr("data-url")){
+                        $("#preview").attr("src",$(obj).attr("data-url"));  
                         $("#no-iframe").hide();
                         $("#preview").show();
                         
                 }else{
-                    var query="\""+company_name+"\" "+$("#city option:selected").val();
+                    var query=""+company_name+" "+$("#city option:selected").val();
                     google_search(query);
                 }
             
-                var emails = $(this).attr("data-email").split(",");
+                var emails = $(obj).attr("data-email").split(",");
                 var hayMails=false;
                 $("#company-details .emails ul").empty();
                 
@@ -197,6 +304,7 @@
                 </select>
             </form>
             <button onclick="javascript:ocultarEmpresas()" id="ocultar">Ocultar válidadas</button>
+            <button onclick="javascript:mostrarEliminadas()" id="mostrarEliminadas">Mostrar eliminadas</button>
         </nav>
         <div id="table-container">
             <table id="empresas">
@@ -204,8 +312,9 @@
                     <td>Nombre</td>
                     <td>URL</td>
                     <td>Email</td>
-                    <td>Contacto</td>
-                    <td>Estado</td>
+                    <td>Cont.</td>
+                    <td>Rev.</td>
+                    <td>Elim.</td>
                 </tr>
                 {% for e in empresas %}
                     <tr
@@ -216,9 +325,11 @@
                         data-url="{{e.web}}"
                         data-address="{{e.direccion}}"
                         data-telephone="{{e.telefono}}"
+                        data-ocultar="{{e.ocultar}}"
+                        {% if e.ocultar %}class="ocultada gris"{% endif %}
                     >
-                        <td class="left-align">{{e.nombre}}</td>
-                        <td>
+                        <td class="left-align company-name">{{e.nombre}}</td>
+                        <td class="url">
                             {% if e.web %}
                                 <span class="small-icon icon sprite-imgs web"><span>Url</span></span>   
                             {% else %}
@@ -232,19 +343,23 @@
                                 <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="contacto">
                             {% if e.nombre_contacto %}
                                 <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
                             {% else %}
                                 <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
                             {% endif %}
                         </td>
-                        <td class="company-state">
+                        <td class="company-state" onclick="javascript:validarEmpresa(this)">
                             {% if e.validada %}
                                 <span class="small-icon icon sprite-imgs tick"><span>Url</span></span>   
                             {% else %}
                                 <span class="small-icon icon sprite-imgs cross"><span>Url</span></span>   
                             {% endif %}
+                        
+                        </td>
+                        <td class="hide-state">
+                                <span class="small-icon icon sprite-imgs cross" onclick="javascript:ocultar(this)"><span>Url</span></span>   
                         
                         </td>
                     </tr>
@@ -257,13 +372,15 @@
     <section id="company-preview" class="onleft">
         <h2 class="blue contrast">Previsualización</h2>
         <nav class="clear-blue contrast">
-            <span class="company-name"></span> 
+            <span class="company-name"></span> <button class="onright" onclick="javascript:pantallaCompleta()">Ver a pantalla completa</button>
         </nav>
         <iframe src="" id="preview">
         
         </iframe>
         <div id="no-iframe">
             <h3 class="big">Búsqueda en Google</h3>
+            <input type="text" name="searchBox" id="googleSearch">
+            <input type="submit" value="Buscar"  onclick="javascript:btn_search()">
             <ul>
             </ul>
 
@@ -318,9 +435,9 @@
         </p>
     </section>
     <section id="employees" class="onleft">
-        <h2 class="blue contrast">Personal</h2>
+        <h2 class="blue contrast">Búsqueda en Linkedin</h2>
         <nav class="clear-blue contrast">
-            Datos recuperados de Linkedin
+            <input type="text" id="linkedinSearch"> <input type="submit" value="Buscar" onclick="javascript:searchEmployees()">
         </nav>
         <ul>
         </ul>

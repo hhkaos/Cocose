@@ -6,8 +6,8 @@ from django.conf import settings
 from models import *  
 
 class AdminEmpresa(admin.ModelAdmin):
-    list_display = ('nombre','_get_emails','ciudad','web')
-    list_filter = ('ciudad',)
+    list_display = ('nombre','_get_emails','ciudad','web','validada','ocultar')
+    list_filter = ('ciudad','validada','ocultar')
     search_fields = ['ciudad']
     filter_horizontal = ('email',)
     
